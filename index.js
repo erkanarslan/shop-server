@@ -32,6 +32,9 @@ app.get('/api/products/:productId', (req, res) => {
 		return;
 	}
 
+	product = {...product};
+	product.relatedProducts = allProducts.filter(p => product.related.includes(p.id));
+
 	res.send(product);
 });
 
@@ -66,7 +69,7 @@ app.delete('/api/orders/:orderId', (req, res) => {
 
 	orders.splice(index, 1);
 
-	res.sendStatus(200);
+	res.send();
 });
 
 app.listen(port, () => {
