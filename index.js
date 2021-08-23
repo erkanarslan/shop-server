@@ -7,6 +7,16 @@ app.use(express.json());
 
 let orders = [];
 let nextOrderId = 1;
+let profile = {
+	name : "Ahmet Sert",
+	phone : "05351234567",
+	address : {
+		address : "Sakaryalılar Mah. 320. Sk. No: 15 Daire: 2",
+		province : "Ankara",
+		county : "Çankaya"
+	},
+	receiveSMS : true
+};
 
 app.get('/', (req, res) => {
 	res.send('Hello World!');
@@ -68,6 +78,18 @@ app.delete('/api/orders/:orderId', (req, res) => {
 	}
 
 	orders.splice(index, 1);
+
+	res.send();
+});
+
+app.get('/api/profile', (req, res) => {
+	res.send(profile);
+});
+
+app.put('/api/profile', (req, res) => {
+	console.log("PUT", req.body);
+
+	Object.assign(profile, req.body);
 
 	res.send();
 });
